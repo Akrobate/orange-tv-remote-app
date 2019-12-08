@@ -1,1 +1,3 @@
-# orange-tv-remote-app
+# Orange TV Remote app
+
+A Flutter application.
