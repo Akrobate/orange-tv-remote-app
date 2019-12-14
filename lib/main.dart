@@ -1,23 +1,21 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
   home: Home(),
 ));
 
-/*
-ConstrainedBox(
-constraints: BoxConstraints.expand(height: 100),
-child: Container(
-color: Colors.orange,
-child: Padding(padding: EdgeInsets.all(16), child: Text('Box Constraint', style: TextStyle(color: Colors.white),)),
-))
-*/
-
 class Home extends StatelessWidget {
+
+  final Color buttonsColor = Colors.white;
+  final double buttonsIconSize = 64.0;
+  final double buttonsEdgeInsetsAll = 8.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text('OrangeTV remote controller'),
         centerTitle: true,
@@ -26,51 +24,8 @@ class Home extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Expanded(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(minWidth: double.infinity),
-                    child: FittedBox(
-                      fit: BoxFit.fill,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: FittedBox(
-                          fit: BoxFit.fill,
-                          child: Icon(Icons.home),
-                        ),
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    iconSize: 24.0,
-                    onPressed: () {},
-                    icon: Icon(Icons.home),
-                    color: Colors.white,
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_left),
-                    color: Colors.white,
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_left),
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
-          ),
-          // Second list
+
+          // 1 line of buttons
           Expanded(
             child: Row(
               children: <Widget>[
@@ -81,11 +36,13 @@ class Home extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: IconButton(
                         onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
                         icon: FittedBox(
                           fit: BoxFit.fill,
-                          child: Icon(Icons.home),
+                          child: Icon(Icons.arrow_back),
                         ),
-                        color: Colors.white,
+                        color: buttonsColor,
                       ),
                     ),
                   ),
@@ -97,43 +54,58 @@ class Home extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: IconButton(
                         onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
                         icon: FittedBox(
                           fit: BoxFit.fill,
-                          child: Icon(Icons.home),
+                          child: Icon(Icons.keyboard_arrow_up),
                         ),
-                        color: Colors.white,
+                        color: buttonsColor,
                       ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child:  IconButton(
-                        padding: EdgeInsets.all(50.0),
-                        onPressed: () {},
-                        icon:  Icon(Icons.home),
-                        color: Colors.white,
-                      ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
+                  child: ConstrainedBox(
                     constraints: BoxConstraints.expand(),
-                    // color: Colors.red,
                     child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child:Icon(Icons.home, color: Colors.white),
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.radio_button_checked),
+                        ),
+                        color: buttonsColor,
                       ),
                     ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.volume_up),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
 
-
-
-          // Third list
+          // 2 line of buttons
           Expanded(
             child: Row(
               children: <Widget>[
@@ -144,56 +116,514 @@ class Home extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: IconButton(
                         onPressed: () {},
-                        padding: EdgeInsets.all(0),
-                        iconSize: 96.0,
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
                         icon: FittedBox(
                           fit: BoxFit.fill,
-                          child: Icon(Icons.home),
+                          child: Icon(Icons.chevron_left),
                         ),
-                        color: Colors.white,
+                        color: buttonsColor,
                       ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            'Ok',
+                            style: TextStyle(
+                                fontSize: buttonsIconSize / 1.2,
+                                color: buttonsColor,
+                                fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
                     constraints: BoxConstraints.expand(),
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: IconButton(
-                        padding: EdgeInsets.all(0),
-                        splashColor: Colors.amberAccent,
                         onPressed: () {},
-                        iconSize: 64.0,
-                        icon: Icon(Icons.home),
-                        color: Colors.red,
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.chevron_right),
+                        ),
+                        color: buttonsColor,
                       ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
+                  child: ConstrainedBox(
                     constraints: BoxConstraints.expand(),
-                    // color: Colors.red,
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child:Icon(Icons.home, color: Colors.white),
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.volume_down),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          // 3 line of buttons
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            'menu',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize / 2.5,
+                              color: buttonsColor,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
+                  child: ConstrainedBox(
                     constraints: BoxConstraints.expand(),
-                    // color: Colors.red,
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
-                      child: Icon(Icons.home, color: Colors.white),
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.keyboard_arrow_down),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            'VOD',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize / 3,
+                              color: buttonsColor,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.volume_off),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          // 4 line of buttons
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '1',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '2',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '3',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.fast_forward),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          // 5 line of buttons
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '4',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '5',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '6',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.play_arrow),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          // 6 line of buttons
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '7',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '8',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '9',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.fast_rewind),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+
+          // 7 line of buttons
+          Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.add_to_queue),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: FlatButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(0),
+                        child: Text(
+                            '0',
+                            style: TextStyle(
+                              fontSize: buttonsIconSize,
+                              color: buttonsColor,
+                            )
+                        ),
+                        // color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.remove_from_queue),
+                        ),
+                        color: buttonsColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(),
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                        iconSize: buttonsIconSize,
+                        icon: FittedBox(
+                          fit: BoxFit.fill,
+                          child: Icon(Icons.power_settings_new),
+                        ),
+                        color: buttonsColor,
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
           )
+
+
+
+
+
+
 
 
         ],
