@@ -6,11 +6,17 @@ void main() => runApp(MaterialApp(
   home: Home(),
 ));
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
-  final Color buttonsColor = Colors.white;
-  final double buttonsIconSize = 64.0;
-  final double buttonsEdgeInsetsAll = 8.0;
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  Color buttonsColor = Colors.white;
+  double buttonsIconSize = 64.0;
+  double buttonsEdgeInsetsAll = 8.0;
 
   @override
   Widget build(BuildContext context) {
