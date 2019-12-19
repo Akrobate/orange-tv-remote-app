@@ -32,7 +32,7 @@ class LocalAppSettings {
     typeRemoteSelected = preferencesInstance.getInt('typeRemoteSelected') ?? LocalAppSettings.DEFAULT_REMOTE_CONTROLLER;
     typeRemoteThemeSelected = preferencesInstance.getInt('typeRemoteThemeSelected') ?? LocalAppSettings.DEFAULT_THEME;
     deviceFound = preferencesInstance.getBool('deviceFound') ?? false;
-    firstAppLaunch = preferencesInstance.getBool('firstAppLaunch') ?? false;
+    firstAppLaunch = preferencesInstance.getBool('firstAppLaunch') ?? true;
   }
 
   String getDeviceIp() {
