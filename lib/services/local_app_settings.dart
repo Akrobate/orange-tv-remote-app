@@ -8,14 +8,17 @@ class LocalAppSettings {
 
   static const int SIMPLE_REMOTE_CONTROLLER = 1;
   static const int ADVANCED_REMOTE_CONTROLLER = 2;
+  static const int DEFAULT_REMOTE_CONTROLLER = LocalAppSettings.ADVANCED_REMOTE_CONTROLLER;
 
   static const int CLEAR_THEME = 1;
   static const int DARK_THEME = 2;
+  static const int DEFAULT_THEME = LocalAppSettings.DARK_THEME;
 
-  // String deviceIp
+  String deviceIp;
   int typeRemoteSelected;
-  // int typeRemoteThemeSelected;
-  // bool deviceFound;
+  int typeRemoteThemeSelected;
+  bool deviceFound;
+  bool firstAppLaunch;
 
   factory LocalAppSettings() {
     return _instance;
@@ -24,23 +27,57 @@ class LocalAppSettings {
   LocalAppSettings._internal();
 
   void init() async{
-    this.preferencesInstance = await SharedPreferences.getInstance();
+    preferencesInstance = await SharedPreferences.getInstance();
+    deviceIp = preferencesInstance.getString('deviceIp') ?? '';
+    typeRemoteSelected = preferencesInstance.getInt('typeRemoteSelected') ?? LocalAppSettings.DEFAULT_REMOTE_CONTROLLER;
+    typeRemoteThemeSelected = preferencesInstance.getInt('typeRemoteThemeSelected') ?? LocalAppSettings.DEFAULT_THEME;
+    deviceFound = preferencesInstance.getBool('deviceFound') ?? false;
+    firstAppLaunch = preferencesInstance.getBool('firstAppLaunch') ?? false;
   }
 
-
-  _read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'my_int_key';
-    final value = prefs.getInt(key) ?? 0;
-    print('read: $value');
+  String getDeviceIp() {
+    return deviceIp;
   }
 
-
-  _save() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'my_int_key';
-    final value = 42;
-    prefs.setInt(key, value);
-    print('saved $value');
+  int getTypeRemoteSelected() {
+    return typeRemoteSelected;
   }
+
+  int getTypeRemoteThemeSelected() {
+    return typeRemoteThemeSelected;
+  }
+
+  bool getDeviceFound() {
+    return deviceFound;
+  }
+
+  bool getFirstAppLaunch() {
+    return firstAppLaunch;
+  }
+
+  void setDeviceIp(String _deviceIp) {
+    preferencesInstance.setString('deviceIp', _deviceIp);
+    deviceIp = _deviceIp;
+  }
+
+  void setTypeRemoteSelected(int _typeRemoteSelected) {
+    preferencesInstance.setInt('typeRemoteSelected', _typeRemoteSelected);
+    typeRemoteSelected = _typeRemoteSelected;
+  }
+
+  void setTypeRemoteThemeSelected(int _typeRemoteThemeSelected) {
+    preferencesInstance.setInt('typeRemoteThemeSelected', _typeRemoteThemeSelected);
+    typeRemoteThemeSelected = _typeRemoteThemeSelected;
+  }
+
+  void setDeviceFound(bool _deviceFound) {
+    preferencesInstance.setBool('deviceFound', _deviceFound);
+    deviceFound = _deviceFound;
+  }
+
+  void setFirstAppLaunch(bool _firstAppLaunch) {
+    preferencesInstance.setBool('firstAppLaunch', _firstAppLaunch);
+    firstAppLaunch = _firstAppLaunch;
+  }
+
 }
