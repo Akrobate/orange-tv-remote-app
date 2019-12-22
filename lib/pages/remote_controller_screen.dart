@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/remote_controller_widgets/advanced_remote_controller.dart';
+import 'package:orange_tv_remote_app/remote_controller_widgets/simple_remote_controller.dart';
 
 class RemoteControllerScreen extends StatefulWidget {
 
@@ -13,6 +14,9 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
   double buttonsIconSize = 64.0;
   double buttonsEdgeInsetsAll = 8.0;
 
+  int templateType = 2;
+
+  //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +37,7 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
             ),
           ],
         ),
-        body: AdvancedRemoteController(),
+        body: templateType == 1 ? AdvancedRemoteController() : SimpleRemoteController(),
     );
   }
 }
