@@ -69,27 +69,11 @@ class SimpleRemoteController extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
-                      iconSize: buttonsIconSize,
-                      icon: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(Icons.volume_up),
-                      ),
-                      color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),
+
 
         // 2 line of buttons
         Expanded(
@@ -146,24 +130,6 @@ class SimpleRemoteController extends StatelessWidget {
                       icon: FittedBox(
                         fit: BoxFit.fill,
                         child: Icon(Icons.chevron_right),
-                      ),
-                      color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
-                      iconSize: buttonsIconSize,
-                      icon: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(Icons.volume_down),
                       ),
                       color: buttonsColor,
                     ),
@@ -239,24 +205,7 @@ class SimpleRemoteController extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
-                      iconSize: buttonsIconSize,
-                      icon: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(Icons.volume_off),
-                      ),
-                      color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),
@@ -271,57 +220,15 @@ class SimpleRemoteController extends StatelessWidget {
                   constraints: BoxConstraints.expand(),
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
-                    child: FlatButton(
+                    child: IconButton(
                       onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '1',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
+                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                      iconSize: buttonsIconSize,
+                      icon: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.volume_up),
                       ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '2',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '3',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
+                      color: buttonsColor,
                     ),
                   ),
                 ),
@@ -344,189 +251,6 @@ class SimpleRemoteController extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-
-
-        // 5 line of buttons
-        Expanded(
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '4',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '5',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '6',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
-                      iconSize: buttonsIconSize,
-                      icon: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(Icons.play_arrow),
-                      ),
-                      color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-
-
-        // 6 line of buttons
-        Expanded(
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '7',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '8',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: FlatButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '9',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
-                      ),
-                      // color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: IconButton(
-                      onPressed: () {},
-                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
-                      iconSize: buttonsIconSize,
-                      icon: FittedBox(
-                        fit: BoxFit.fill,
-                        child: Icon(Icons.fast_rewind),
-                      ),
-                      color: buttonsColor,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-
-
-        // 7 line of buttons
-        Expanded(
-          child: Row(
-            children: <Widget>[
               Expanded(
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(),
@@ -545,22 +269,49 @@ class SimpleRemoteController extends StatelessWidget {
                   ),
                 ),
               ),
+            ],
+          ),
+        ),
+
+
+        // 5 line of buttons
+        Expanded(
+          child: Row(
+            children: <Widget>[
+
               Expanded(
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(),
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
-                    child: FlatButton(
+                    child: IconButton(
                       onPressed: () {},
-                      padding: EdgeInsets.all(0),
-                      child: Text(
-                          '0',
-                          style: TextStyle(
-                            fontSize: buttonsIconSize,
-                            color: buttonsColor,
-                          )
+                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                      iconSize: buttonsIconSize,
+                      icon: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.volume_down),
                       ),
-                      // color: buttonsColor,
+                      color: buttonsColor,
+                    ),
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                      iconSize: buttonsIconSize,
+                      icon: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.play_arrow),
+                      ),
+                      color: buttonsColor,
                     ),
                   ),
                 ),
@@ -577,6 +328,52 @@ class SimpleRemoteController extends StatelessWidget {
                       icon: FittedBox(
                         fit: BoxFit.fill,
                         child: Icon(Icons.remove_from_queue),
+                      ),
+                      color: buttonsColor,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+
+        // 6 line of buttons
+        Expanded(
+          child: Row(
+            children: <Widget>[
+
+              Expanded(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                      iconSize: buttonsIconSize,
+                      icon: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.volume_off),
+                      ),
+                      color: buttonsColor,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: IconButton(
+                      onPressed: () {},
+                      padding: EdgeInsets.all(buttonsEdgeInsetsAll),
+                      iconSize: buttonsIconSize,
+                      icon: FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.fast_rewind),
                       ),
                       color: buttonsColor,
                     ),
