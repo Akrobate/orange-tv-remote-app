@@ -1,11 +1,17 @@
 import 'package:http/http.dart';
 import 'package:query_params/query_params.dart';
+import 'package:orange_tv_remote_app/constants/device_http_params.dart';
 import 'dart:convert';
 
 class DeviceHttpClient {
 
   String deviceIp;
   final String devicePort = '8080';
+
+
+  Future<void> commandModeSimple(int command) async {
+    return this.command(DeviceHttpParams.MODE_SIMPLE, command);
+  }
 
   Future<void> command(int mode, int command) async {
 
