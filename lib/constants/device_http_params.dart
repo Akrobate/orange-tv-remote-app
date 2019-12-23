@@ -19,7 +19,7 @@ class DeviceHttpParams {
   static const UP = 103;
   static const DOWN = 108;
   static const LEFT = 105;
-  static const RIGHT = 116;
+  static const RIGHT = 106;
   static const OK = 352;
   static const BACK = 158;
   static const MENU = 139;
