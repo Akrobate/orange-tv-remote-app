@@ -8,14 +8,13 @@ class SimpleRemoteController extends StatelessWidget {
   final Color buttonsColor = Colors.white;
   final double buttonsIconSize = 64.0;
   final double buttonsEdgeInsetsAll = 8.0;
-  DeviceHttpClient device;
+  final DeviceHttpClient device = DeviceHttpClient();
 
   @override
   Widget build(BuildContext context) {
 
     String deviceIp = '192.168.1.12';
 
-    device = DeviceHttpClient();
     device.setDeviceIp(deviceIp);
 
     return Column(
