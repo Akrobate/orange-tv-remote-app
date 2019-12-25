@@ -26,7 +26,7 @@ class LocalAppSettings {
 
   LocalAppSettings._internal();
 
-  void init() async{
+  Future<void> init() async {
     preferencesInstance = await SharedPreferences.getInstance();
     deviceIp = preferencesInstance.getString('deviceIp') ?? '';
     typeRemoteSelected = preferencesInstance.getInt('typeRemoteSelected') ?? LocalAppSettings.DEFAULT_REMOTE_CONTROLLER;
