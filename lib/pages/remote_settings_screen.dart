@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orange_tv_remote_app/services/local_app_settings.dart';
 
 class RemoteSettingsScreen extends StatefulWidget {
   @override
@@ -6,11 +7,33 @@ class RemoteSettingsScreen extends StatefulWidget {
 }
 
 class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
+
+  final LocalAppSettings appSettings = LocalAppSettings();
+  bool useClearTheme = false;
+  bool useSimpleRemoteController = false;
+
+  initState(){
+    super.initState();
+    setState(() {
+      int typeRemoteSelected = appSettings.getTypeRemoteSelected();
+      if (typeRemoteSelected == 1) {
+        useSimpleRemoteController = true;
+      } else {
+        useSimpleRemoteController = false;
+      }
+    });
+  }
+
+  void saveTypeRemote() {
+    if (useSimpleRemoteController) {
+      appSettings.setTypeRemoteSelected(1);
+    } else {
+      appSettings.setTypeRemoteSelected(2);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    bool useClearTheme = false;
-    bool useSimpleRemoteController = false;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -37,6 +60,9 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
                 onChanged: (value) {
                   setState(() {
                     useSimpleRemoteController = value;
+                    print('useSimpleRemoteController');
+                    print(useSimpleRemoteController);
+                    saveTypeRemote();
                   });
                 },
                 value: useSimpleRemoteController,

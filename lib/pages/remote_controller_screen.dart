@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/remote_controller_widgets/advanced_remote_controller.dart';
 import 'package:orange_tv_remote_app/remote_controller_widgets/simple_remote_controller.dart';
+import 'package:orange_tv_remote_app/services/local_app_settings.dart';
 
 class RemoteControllerScreen extends StatefulWidget {
 
@@ -10,15 +11,31 @@ class RemoteControllerScreen extends StatefulWidget {
 
 class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
 
+  final LocalAppSettings appSettings = LocalAppSettings();
+
   Color buttonsColor = Colors.white;
   double buttonsIconSize = 64.0;
   double buttonsEdgeInsetsAll = 8.0;
 
-  int templateType = 2;
+  int templateType = 1;
 
-  //
+  initState() {
+    super.initState();
+    loadAppSettings();
+  }
+
+  void loadAppSettings() async {
+    await appSettings.init();
+    setState(() {
+      templateType = appSettings.getTypeRemoteSelected();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    templateType = appSettings.getTypeRemoteSelected();
+
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -37,7 +54,7 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
             ),
           ],
         ),
-        body: templateType == 1 ? AdvancedRemoteController() : SimpleRemoteController(),
+        body: templateType == 1 ? SimpleRemoteController() : AdvancedRemoteController(),
     );
   }
 }
