@@ -12,9 +12,14 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
   bool useClearTheme = false;
   bool useSimpleRemoteController = false;
 
+  final ipFieldController = TextEditingController();
+
   initState(){
     super.initState();
     setState(() {
+
+      ipFieldController.text = appSettings.getDeviceIp();
+
       int typeRemoteSelected = appSettings.getTypeRemoteSelected();
       if (typeRemoteSelected == 1) {
         useSimpleRemoteController = true;
@@ -32,6 +37,11 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
     }
   }
 
+  void dispose() {
+    ipFieldController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -44,57 +54,88 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
         elevation: 0.0,
       ),
       body: Center(
-        child:  Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
+        child:  SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
                 'Utiliser la télécommande simplifiée',
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
                 )
-            ),
-            Transform.scale(
-              scale: 2.0,
-              child: Switch(
-                onChanged: (value) {
-                  setState(() {
-                    useSimpleRemoteController = value;
-                    print('useSimpleRemoteController');
-                    print(useSimpleRemoteController);
-                    saveTypeRemote();
-                  });
-                },
-                value: useSimpleRemoteController,
-                activeTrackColor: Colors.lightGreenAccent,
-                activeColor: Colors.green,
-                inactiveTrackColor: Colors.green[900],
               ),
-            ),
-            SizedBox(height: 40.0),
-            Text(
+              Transform.scale(
+                scale: 2.0,
+                child: Switch(
+                  onChanged: (value) {
+                    setState(() {
+                      useSimpleRemoteController = value;
+                      print('useSimpleRemoteController');
+                      print(useSimpleRemoteController);
+                      saveTypeRemote();
+                    });
+                  },
+                  value: useSimpleRemoteController,
+                  activeTrackColor: Colors.lightGreenAccent,
+                  activeColor: Colors.green,
+                  inactiveTrackColor: Colors.green[900],
+                ),
+              ),
+              SizedBox(height: 40.0),
+              Text(
                 'Télécommande sur fond clair',
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
                 )
-            ),
-            Transform.scale(
-              scale: 2.0,
-              child: Switch(
-                onChanged: (value) {
-                  setState(() {
-                    useClearTheme = value;
-                  });
-                },
-                value: useClearTheme,
-                activeTrackColor: Colors.lightGreenAccent,
-                activeColor: Colors.green,
-                inactiveTrackColor: Colors.green[900],
               ),
-            ),
-
-          ]
+              Transform.scale(
+                scale: 2.0,
+                child: Switch(
+                  onChanged: (value) {
+                    setState(() {
+                      useClearTheme = value;
+                    });
+                  },
+                  value: useClearTheme,
+                  activeTrackColor: Colors.lightGreenAccent,
+                  activeColor: Colors.green,
+                  inactiveTrackColor: Colors.green[900],
+                ),
+              ),
+              SizedBox(height: 40.0),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: ipFieldController,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24.0,
+                  ),
+                  autocorrect: false,
+                  decoration: InputDecoration(
+                    hintText: 'Adresse ip',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[800],
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[800]),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  // onEditingComplete: () {
+                  //   print(ipFieldController.text);
+                  // }
+                  onSubmitted: (deviceIp) {
+                    appSettings.setDeviceIp(deviceIp);
+                  }
+                ),
+              ),
+            ]
+          ),
         )
       )
     );
