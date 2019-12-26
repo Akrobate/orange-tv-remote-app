@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/remote_controller_widgets/advanced_remote_controller.dart';
 import 'package:orange_tv_remote_app/remote_controller_widgets/simple_remote_controller.dart';
 import 'package:orange_tv_remote_app/services/local_app_settings.dart';
+import 'package:orange_tv_remote_app/services/device_http_client.dart';
 
 class RemoteControllerScreen extends StatefulWidget {
 
@@ -12,6 +13,7 @@ class RemoteControllerScreen extends StatefulWidget {
 class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
 
   final LocalAppSettings appSettings = LocalAppSettings();
+  final DeviceHttpClient device = DeviceHttpClient();
 
   Color buttonsColor = Colors.white;
   double buttonsIconSize = 64.0;
@@ -35,6 +37,7 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
   Widget build(BuildContext context) {
 
     templateType = appSettings.getTypeRemoteSelected();
+    device.setDeviceIp(appSettings.getDeviceIp());
 
     return Scaffold(
         backgroundColor: Colors.black,
@@ -48,13 +51,12 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
-                print('Settings clics');
                 Navigator.pushNamed(context, '/settings_screen');
               },
             ),
           ],
         ),
-        body: templateType == 1 ? SimpleRemoteController() : AdvancedRemoteController(),
+        body: templateType == 1 ? SimpleRemoteController(device: device) : AdvancedRemoteController(device: device),
     );
   }
 }

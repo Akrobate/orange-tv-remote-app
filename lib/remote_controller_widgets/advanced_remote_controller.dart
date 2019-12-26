@@ -9,12 +9,14 @@ class AdvancedRemoteController extends StatelessWidget {
   final Color buttonsColor = Colors.white;
   final double buttonsIconSize = 64.0;
   final double buttonsEdgeInsetsAll = 8.0;
-  final DeviceHttpClient device = DeviceHttpClient();
+  final DeviceHttpClient device;
+
+  AdvancedRemoteController({
+    this.device,
+  });
 
   @override
   Widget build(BuildContext context) {
-
-    device.setDeviceIp(appSettings.getDeviceIp());
 
     return Column(
       children: <Widget>[
