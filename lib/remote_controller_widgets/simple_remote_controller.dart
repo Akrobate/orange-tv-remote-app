@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/services/device_http_client.dart';
 import 'package:orange_tv_remote_app/constants/device_http_params.dart';
-
+import 'package:orange_tv_remote_app/services/local_app_settings.dart';
 
 class SimpleRemoteController extends StatelessWidget {
 
+  final LocalAppSettings appSettings = LocalAppSettings();
   final Color buttonsColor = Colors.white;
   final double buttonsIconSize = 64.0;
   final double buttonsEdgeInsetsAll = 8.0;
@@ -13,9 +14,7 @@ class SimpleRemoteController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    String deviceIp = '192.168.1.12';
-
-    device.setDeviceIp(deviceIp);
+    device.setDeviceIp(appSettings.getDeviceIp());
 
     return Column(
       children: <Widget>[
