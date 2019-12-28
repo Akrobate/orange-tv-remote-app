@@ -4,18 +4,21 @@ import 'package:orange_tv_remote_app/themes/dark_theme.dart';
 
 class ThemeManager {
 
-  ThemeAbstract theme;
+  static ThemeAbstract getTheme(int themeId) {
 
-  ThemeAbstract getTheme(int themeId) {
+    ThemeAbstract theme;
+
     switch (themeId) {
       case ThemeAbstract.DARK_THEME:
-        this.theme = DarkTheme();
+        theme = DarkTheme();
         break;
       case ThemeAbstract.CLEAR_THEME:
-        this.theme = ClearTheme();
+        theme = ClearTheme();
         break;
+      default:
+        theme = DarkTheme();
     }
-    return this.theme;
+    return theme;
   }
 
 }
