@@ -10,8 +10,8 @@ class LocalAppSettings {
   static const int ADVANCED_REMOTE_CONTROLLER = 2;
   static const int DEFAULT_REMOTE_CONTROLLER = LocalAppSettings.ADVANCED_REMOTE_CONTROLLER;
 
-  static const int CLEAR_THEME = 1;
-  static const int DARK_THEME = 2;
+  static const int DARK_THEME = 1;
+  static const int CLEAR_THEME = 2;
   static const int DEFAULT_THEME = LocalAppSettings.DARK_THEME;
 
   String deviceIp;

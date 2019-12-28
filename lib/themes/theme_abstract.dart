@@ -20,7 +20,7 @@ abstract class ThemeAbstract {
     return this.remoteControllerBackgroundColor;
   }
 
-  Color getToolBarBackgroundColor() {
+  Color getAppBarBackgroundColor() {
     return this.toolBarBackgroundColor;
   }
 }

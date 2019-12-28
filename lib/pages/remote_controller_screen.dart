@@ -3,6 +3,8 @@ import 'package:orange_tv_remote_app/remote_controller_widgets/advanced_remote_c
 import 'package:orange_tv_remote_app/remote_controller_widgets/simple_remote_controller.dart';
 import 'package:orange_tv_remote_app/services/local_app_settings.dart';
 import 'package:orange_tv_remote_app/services/device_http_client.dart';
+import 'package:orange_tv_remote_app/themes/theme_abstract.dart';
+import 'package:orange_tv_remote_app/themes/themes_manager.dart';
 
 class RemoteControllerScreen extends StatefulWidget {
 
@@ -15,7 +17,9 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
   final LocalAppSettings appSettings = LocalAppSettings();
   final DeviceHttpClient device = DeviceHttpClient();
 
-  Color buttonsColor = Colors.white;
+  ThemeAbstract theme;
+
+  Color appBarBackgroundColor;
   double buttonsIconSize = 64.0;
   double buttonsEdgeInsetsAll = 8.0;
 
@@ -39,12 +43,15 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
     templateType = appSettings.getTypeRemoteSelected();
     device.setDeviceIp(appSettings.getDeviceIp());
 
+    theme = ThemeManager.getTheme(appSettings.getTypeRemoteThemeSelected());
+    appBarBackgroundColor = theme.getAppBarBackgroundColor();
+
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text('OrangeTV télécommande'),
           centerTitle: true,
-          backgroundColor: Colors.grey[850],
+          backgroundColor: appBarBackgroundColor,
           elevation: 0.0,
           actions: <Widget>[
             // action button

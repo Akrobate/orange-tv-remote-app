@@ -21,19 +21,35 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
       ipFieldController.text = appSettings.getDeviceIp();
 
       int typeRemoteSelected = appSettings.getTypeRemoteSelected();
-      if (typeRemoteSelected == 1) {
+      if (typeRemoteSelected == LocalAppSettings.SIMPLE_REMOTE_CONTROLLER) {
         useSimpleRemoteController = true;
       } else {
         useSimpleRemoteController = false;
+      }
+
+      int typeRemoteThemeSelected = appSettings.getTypeRemoteThemeSelected();
+      if (typeRemoteThemeSelected == LocalAppSettings.DARK_THEME) {
+        useClearTheme = false;
+      } else {
+        useClearTheme = true;
       }
     });
   }
 
   void saveTypeRemote() {
     if (useSimpleRemoteController) {
-      appSettings.setTypeRemoteSelected(1);
+      appSettings.setTypeRemoteSelected(LocalAppSettings.SIMPLE_REMOTE_CONTROLLER);
     } else {
-      appSettings.setTypeRemoteSelected(2);
+      appSettings.setTypeRemoteSelected(LocalAppSettings.ADVANCED_REMOTE_CONTROLLER);
+    }
+  }
+
+
+  void saveThemeRemote() {
+    if (useClearTheme) {
+      appSettings.setTypeRemoteThemeSelected(LocalAppSettings.CLEAR_THEME);
+    } else {
+      appSettings.setTypeRemoteThemeSelected(LocalAppSettings.DARK_THEME);
     }
   }
 
@@ -71,8 +87,6 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
                   onChanged: (value) {
                     setState(() {
                       useSimpleRemoteController = value;
-                      print('useSimpleRemoteController');
-                      print(useSimpleRemoteController);
                       saveTypeRemote();
                     });
                   },
@@ -96,6 +110,7 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
                   onChanged: (value) {
                     setState(() {
                       useClearTheme = value;
+                      saveThemeRemote();
                     });
                   },
                   value: useClearTheme,
