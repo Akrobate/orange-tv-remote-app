@@ -16,13 +16,9 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
 
   final LocalAppSettings appSettings = LocalAppSettings();
   final DeviceHttpClient device = DeviceHttpClient();
-
   ThemeAbstract theme;
-
   Color appBarBackgroundColor;
-  double buttonsIconSize = 64.0;
-  double buttonsEdgeInsetsAll = 8.0;
-
+  Color backgroundColor;
   int templateType = 1;
 
   initState() {
@@ -45,9 +41,10 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
 
     theme = ThemeManager.getTheme(appSettings.getTypeRemoteThemeSelected());
     appBarBackgroundColor = theme.getAppBarBackgroundColor();
+    backgroundColor = theme.getRemoteControllerBackgroundColor();
 
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor,
         appBar: AppBar(
           title: Text('OrangeTV télécommande'),
           centerTitle: true,
@@ -63,7 +60,7 @@ class _RemoteControllerScreenState extends State<RemoteControllerScreen> {
             ),
           ],
         ),
-        body: templateType == 1 ? SimpleRemoteController(device: device) : AdvancedRemoteController(device: device),
+        body: templateType == 1 ? SimpleRemoteController(device: device, theme: theme) : AdvancedRemoteController(device: device, theme: theme),
     );
   }
 }

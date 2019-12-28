@@ -2,21 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/services/device_http_client.dart';
 import 'package:orange_tv_remote_app/constants/device_http_params.dart';
 import 'package:orange_tv_remote_app/services/local_app_settings.dart';
+import 'package:orange_tv_remote_app/themes/theme_abstract.dart';
 
 class AdvancedRemoteController extends StatelessWidget {
 
   final LocalAppSettings appSettings = LocalAppSettings();
-  final Color buttonsColor = Colors.white;
+  // final Color buttonsColor = Colors.white;
   final double buttonsIconSize = 64.0;
   final double buttonsEdgeInsetsAll = 8.0;
   final DeviceHttpClient device;
+  final ThemeAbstract theme;
 
   AdvancedRemoteController({
     this.device,
+    this.theme,
   });
 
   @override
   Widget build(BuildContext context) {
+
+    Color buttonsColor = theme.getButtonsColor();
 
     return Column(
       children: <Widget>[
