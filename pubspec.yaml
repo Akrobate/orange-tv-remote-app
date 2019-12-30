@@ -21,7 +21,8 @@ dependencies:
     sdk: flutter
   shared_preferences: ^0.4.3
   http: ^0.12.0+2
-  query_params: '^0.6.1'
+  query_params: ^0.6.1
+  ping_discover_network: 0.2.0+1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

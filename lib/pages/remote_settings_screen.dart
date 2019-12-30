@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/services/local_app_settings.dart';
+import 'package:ping_discover_network/ping_discover_network.dart';
+
 
 class RemoteSettingsScreen extends StatefulWidget {
   @override
@@ -56,6 +58,30 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
   void dispose() {
     ipFieldController.dispose();
     super.dispose();
+  }
+
+  void searchDeviceOnNetwork() {
+
+    const ip_address_prefix = '192.168.1';
+
+    List<String> foundDevices = [];
+    print('Button pressed');
+    const port = 8080;
+    final stream = NetworkAnalyzer.discover2(
+      ip_address_prefix, port,
+      timeout: Duration(milliseconds: 5000),
+    );
+
+    stream.listen((NetworkAddress address) {
+      if (address.exists) {
+        print('Found device: ${address.ip}:$port');
+        foundDevices.add(address.ip);
+      }
+    }).onDone(() {
+      print('Finish.');
+      print(foundDevices);
+    });
+
   }
 
   @override
@@ -145,13 +171,27 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
                         borderSide: BorderSide(color: Colors.white),
                       ),
                     ),
-                    // onEditingComplete: () {
-                    //   print(ipFieldController.text);
-                    // }
                     onSubmitted: (deviceIp) {
                       appSettings.setDeviceIp(deviceIp);
                     }
                   ),
+                ),
+                SizedBox(height: 20),
+                FlatButton.icon(
+                  onPressed: () {
+                    searchDeviceOnNetwork();
+                  },
+                  color: Colors.green,
+                  padding: EdgeInsets.all(10.0),
+                  label: Text(
+                    'Recherche automatique',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  icon: Icon(Icons.search),
                 ),
               ]
             ),
