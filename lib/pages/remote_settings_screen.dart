@@ -60,35 +60,67 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
     super.dispose();
   }
 
-  void searchDeviceOnNetwork() async {
+
+  void dialog(context, title, message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(title),
+            content: new Text(message),
+            actions: <Widget>[
+              new FlatButton(
+                  child: new Text("Close"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
+            ],
+          );
+        }
+    );
+  }
+
+  void searchDeviceOnNetwork(context) async {
 
     final String ip = await Wifi.ip;
     final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    final String subnetFirst = ip.substring(0, subnet.lastIndexOf('.'));
 
     print(subnet);
-    // final int port = 80;
+    print(subnetFirst);
 
+    if (subnetFirst != '192.168') {
+      dialog(
+          context,
+          'Problème réseau',
+          'Votre wifi ne semble pas connecté au réseau local'
+      );
+    } else {
+      final String ipAddressPrefix = subnet;
 
-    const ip_address_prefix = '192.168.1';
+      List<String> foundDevices = [];
+      print('Button pressed');
+      const port = 8080;
+      final stream = NetworkAnalyzer.discover2(
+        ipAddressPrefix, port,
+        timeout: Duration(milliseconds: 5000),
+      );
 
-    List<String> foundDevices = [];
-    print('Button pressed');
-    const port = 8080;
-    final stream = NetworkAnalyzer.discover2(
-      ip_address_prefix, port,
-      timeout: Duration(milliseconds: 5000),
-    );
-
-    stream.listen((NetworkAddress address) {
-      if (address.exists) {
-        print('Found device: ${address.ip}:$port');
-        foundDevices.add(address.ip);
-      }
-    }).onDone(() {
-      print('Finish.');
-      print(foundDevices);
-    });
-
+      stream.listen((NetworkAddress address) {
+        if (address.exists) {
+          print('Found device: ${address.ip}:$port');
+          foundDevices.add(address.ip);
+        }
+      }).onDone(() {
+        print('Finish.');
+        print(foundDevices);
+        dialog(
+            context,
+            'Box trouvée',
+            'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
+        );
+      });
+    }
   }
 
   @override
@@ -186,7 +218,7 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
                 SizedBox(height: 20),
                 FlatButton.icon(
                   onPressed: () {
-                    searchDeviceOnNetwork();
+                    searchDeviceOnNetwork(context);
                   },
                   color: Colors.green,
                   padding: EdgeInsets.all(10.0),
