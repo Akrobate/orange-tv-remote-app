@@ -123,13 +123,17 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
         // device.getInfo()
 
         if (foundDevices.length > 0) {
-          ipFieldController.text = appSettings.getDeviceIp();
           appSettings.setDeviceIp(foundDevices[0]);
+          setState(() {
+            ipFieldController.text = appSettings.getDeviceIp();
+          });
+
           dialog(
               context,
               'Box trouvée',
               'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
           );
+
         } else {
           dialog(
               context,
