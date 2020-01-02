@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orange_tv_remote_app/services/local_app_settings.dart';
+import 'package:orange_tv_remote_app/services/device_http_client.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
 import 'package:wifi/wifi.dart';
 
@@ -14,8 +15,11 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
   bool useClearTheme = false;
   bool useSimpleRemoteController = false;
 
+  final DeviceHttpClient device = DeviceHttpClient();
+
   final ipFieldController = TextEditingController();
 
+  @override
   initState(){
     super.initState();
     setState(() {
@@ -38,6 +42,12 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
     });
   }
 
+  @override
+  void dispose() {
+    ipFieldController.dispose();
+    super.dispose();
+  }
+
   void saveTypeRemote() {
     if (useSimpleRemoteController) {
       appSettings.setTypeRemoteSelected(LocalAppSettings.SIMPLE_REMOTE_CONTROLLER);
@@ -55,12 +65,6 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
     }
   }
 
-  void dispose() {
-    ipFieldController.dispose();
-    super.dispose();
-  }
-
-
   void dialog(context, title, message) {
     showDialog(
         context: context,
@@ -70,7 +74,7 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
             content: new Text(message),
             actions: <Widget>[
               new FlatButton(
-                  child: new Text("Close"),
+                  child: new Text("Fermer"),
                   onPressed: () {
                     Navigator.of(context).pop();
                   }),
@@ -99,7 +103,7 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
       final String ipAddressPrefix = subnet;
 
       List<String> foundDevices = [];
-      print('Button pressed');
+
       const port = 8080;
       final stream = NetworkAnalyzer.discover2(
         ipAddressPrefix, port,
@@ -114,11 +118,25 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
       }).onDone(() {
         print('Finish.');
         print(foundDevices);
-        dialog(
-            context,
-            'Box trouvée',
-            'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
-        );
+
+        // device.setDeviceIp(_deviceIp)
+        // device.getInfo()
+
+        if (foundDevices.length > 0) {
+          ipFieldController.text = appSettings.getDeviceIp();
+          appSettings.setDeviceIp(foundDevices[0]);
+          dialog(
+              context,
+              'Box trouvée',
+              'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
+          );
+        } else {
+          dialog(
+              context,
+              'Box non trouvée',
+              'Impossible de trouver votre box, saisissez son ip manuellement.'
+          );
+        }
       });
     }
   }
