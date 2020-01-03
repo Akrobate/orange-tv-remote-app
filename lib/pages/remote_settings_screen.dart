@@ -87,62 +87,51 @@ class _RemoteSettingsScreenState extends State<RemoteSettingsScreen> {
   void searchDeviceOnNetwork(context) async {
 
     final String ip = await Wifi.ip;
-    final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-    final String subnetFirst = ip.substring(0, subnet.lastIndexOf('.'));
+    String subnet = ip.substring(0, ip.lastIndexOf('.'));
+    String subnetFirst = ip.substring(0, subnet.lastIndexOf('.'));
+    List<String> foundDevices = [];
 
-    print(subnet);
-    print(subnetFirst);
+    subnet = subnetFirst != '192.168' ? '192.168.1' : subnet;
 
-    if (subnetFirst != '192.168') {
-      dialog(
+    String port = device.getDevicePort();
+    final stream = NetworkAnalyzer.discover2(
+      subnet,
+      int.parse(port),
+      timeout: Duration(milliseconds: 5000),
+    );
+
+    stream.listen((NetworkAddress address) {
+      if (address.exists) {
+        print('Found device: ${address.ip}:$port');
+        foundDevices.add(address.ip);
+      }
+    }).onDone(() async {
+      print(foundDevices);
+
+      if (foundDevices.length > 0) {
+        List<Future> futures = <Future>[];
+        for (String ip_to_test in foundDevices) {
+          futures.add(device.checkDevice(ip_to_test));
+        }
+        var pingDeviceResultList = await Future.wait(futures);
+        int indexFoundDevice = pingDeviceResultList.indexOf(true);
+        appSettings.setDeviceIp(foundDevices[indexFoundDevice]);
+        setState(() {
+          ipFieldController.text = appSettings.getDeviceIp();
+        });
+        dialog(
           context,
-          'Problème réseau',
-          'Votre wifi ne semble pas connecté au réseau local'
-      );
-    } else {
-      final String ipAddressPrefix = subnet;
-
-      List<String> foundDevices = [];
-
-      const port = 8080;
-      final stream = NetworkAnalyzer.discover2(
-        ipAddressPrefix, port,
-        timeout: Duration(milliseconds: 5000),
-      );
-
-      stream.listen((NetworkAddress address) {
-        if (address.exists) {
-          print('Found device: ${address.ip}:$port');
-          foundDevices.add(address.ip);
-        }
-      }).onDone(() {
-        print('Finish.');
-        print(foundDevices);
-
-        // device.setDeviceIp(_deviceIp)
-        // device.getInfo()
-
-        if (foundDevices.length > 0) {
-          appSettings.setDeviceIp(foundDevices[0]);
-          setState(() {
-            ipFieldController.text = appSettings.getDeviceIp();
-          });
-
-          dialog(
-              context,
-              'Box trouvée',
-              'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
-          );
-
-        } else {
-          dialog(
-              context,
-              'Box non trouvée',
-              'Impossible de trouver votre box, saisissez son ip manuellement.'
-          );
-        }
-      });
-    }
+          'Box trouvée',
+          'Votre box a bien été trouvée et son ip enregitrée dans l\'application'
+        );
+      } else {
+        dialog(
+          context,
+          'Box non trouvée',
+          'Impossible de trouver votre box, saisissez son ip manuellement.'
+        );
+      }
+    });
   }
 
   @override
