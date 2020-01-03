@@ -54,6 +54,28 @@ class DeviceHttpClient {
     return response;
   }
 
+  Future<bool> checkDevice(String deviceIpString) async {
+
+    bool returnValue = false;
+
+    URLQueryParams queryParams = new URLQueryParams();
+    queryParams.append('operation', '10');
+    String queryParamsString = queryParams.toString();
+    print('http://$deviceIpString:$devicePort/remoteControl/cmd?$queryParamsString');
+    try {
+      Response response = await get('http://$deviceIpString:$devicePort/remoteControl/cmd?$queryParamsString')
+        .timeout(const Duration(seconds: 5));
+      Map result = jsonDecode(response.body);
+      if (result['result']['message'] == 'ok') {
+        returnValue = true;
+      }
+    } catch(error) {
+      print(error);
+    }
+
+    return returnValue;
+  }
+
   void setDeviceIp(String _deviceIp) {
     deviceIp = _deviceIp;
   }
