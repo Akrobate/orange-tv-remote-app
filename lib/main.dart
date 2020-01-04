@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 
 void main() {
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   const bool debug_mode = false;
 
   SystemChrome
