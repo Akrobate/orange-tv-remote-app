@@ -17,6 +17,10 @@ class SimpleRemoteController extends StatelessWidget {
     this.theme,
   });
 
+  controllerButtonPressed(int command) {
+    device.commandModeSimple(command);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -36,7 +40,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.BACK);
+                        controllerButtonPressed(DeviceHttpParams.BACK);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -56,7 +60,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.UP);
+                        controllerButtonPressed(DeviceHttpParams.UP);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -76,7 +80,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.RECORD);
+                        controllerButtonPressed(DeviceHttpParams.RECORD);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -106,7 +110,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.LEFT);
+                        controllerButtonPressed(DeviceHttpParams.LEFT);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -126,7 +130,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: FlatButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.OK);
+                        controllerButtonPressed(DeviceHttpParams.OK);
                       },
                       padding: EdgeInsets.all(0),
                       child: Text(
@@ -149,7 +153,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.RIGHT);
+                        controllerButtonPressed(DeviceHttpParams.RIGHT);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -178,7 +182,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: FlatButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.MENU);
+                        controllerButtonPressed(DeviceHttpParams.MENU);
                       },
                       padding: EdgeInsets.all(0),
                       child: Text(
@@ -201,7 +205,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.DOWN);
+                        controllerButtonPressed(DeviceHttpParams.DOWN);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -221,7 +225,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: FlatButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.VOD);
+                        controllerButtonPressed(DeviceHttpParams.VOD);
                       },
                       padding: EdgeInsets.all(0),
                       child: Text(
@@ -254,7 +258,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.VOLUME_UP);
+                        controllerButtonPressed(DeviceHttpParams.VOLUME_UP);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -274,7 +278,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.FAST_FORWARD);
+                        controllerButtonPressed(DeviceHttpParams.FAST_FORWARD);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -294,7 +298,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.CHANNEL_NEXT);
+                        controllerButtonPressed(DeviceHttpParams.CHANNEL_NEXT);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -323,7 +327,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.VOLUME_DOWN);
+                        controllerButtonPressed(DeviceHttpParams.VOLUME_DOWN);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -343,7 +347,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.PLAY_PAUSE);
+                        controllerButtonPressed(DeviceHttpParams.PLAY_PAUSE);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -363,7 +367,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.CHANNEL_PREVIOUS);
+                        controllerButtonPressed(DeviceHttpParams.CHANNEL_PREVIOUS);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -392,7 +396,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.VOLUME_MUTE);
+                        controllerButtonPressed(DeviceHttpParams.VOLUME_MUTE);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -412,7 +416,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.FAST_BACKWARD);
+                        controllerButtonPressed(DeviceHttpParams.FAST_BACKWARD);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
@@ -432,7 +436,7 @@ class SimpleRemoteController extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     child: IconButton(
                       onPressed: () {
-                        device.commandModeSimple(DeviceHttpParams.ON_OFF);
+                        controllerButtonPressed(DeviceHttpParams.ON_OFF);
                       },
                       padding: EdgeInsets.all(buttonsEdgeInsetsAll),
                       iconSize: buttonsIconSize,
